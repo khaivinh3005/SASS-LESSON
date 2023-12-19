@@ -1,0 +1,110 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+// Common variable
+// Noel
+$theme-color-noel: red;
+$font-color-noel: black;
+$border-noel: 1px solid $font-color-noel;
+
+// Spring
+$theme-color-spring: yellow;
+
+$font-size-icon: 20px;
+$font-size-title: 40px;
+
+// Object
+%theme-noel {
+  background-color: $theme-color-noel;
+  box-shadow: 0 0 1px rgba($theme-color-noel, 0.25);
+  padding: 10px;
+}
+
+@mixin flex-common {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin theme($color) {
+  background-color: $color;
+  box-shadow: 0 0 1px rgba($color, 0.25);
+  padding: 10px;
+}
+
+.header {
+  // css
+  //   background-color: red;
+  //   box-shadow: 0 0 1px rgba(red, 0.25);
+  //   padding: 10px;
+
+  //  update
+  //1  @include theme($theme-color-spring);
+
+  //2
+  @extend %theme-noel;
+
+  .header-logo {
+    // css
+
+    // display: flex;
+    // align-items: center;
+    // justify-content: center;
+
+    // scss
+    @include flex-common;
+
+    .header-logo-title {
+      margin-right: 10px;
+      font-size: $font-size-title;
+      font-weight: 600;
+      color: $font-color-noel;
+
+      position: relative;
+
+      &::before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 2px;
+        width: 0%;
+        background-color: $theme-color-spring;
+      }
+
+      &:hover {
+        color: $theme-color-spring;
+
+        &::before {
+          width: 100%;
+          height: 10px;
+          transition: all linear 0.3s;
+        }
+      }
+    }
+
+    .header-logo-icon {
+      margin-left: 10px;
+      padding: 1px;
+      border: $border-noel;
+      color: $font-color-noel;
+
+      i {
+        font-size: $font-size-icon;
+      }
+    }
+  }
+
+  .header-nav {
+    @include flex-common;
+
+    gap: 20px;
+
+    span {
+      color: $font-color-noel;
+    }
+  }
+}
